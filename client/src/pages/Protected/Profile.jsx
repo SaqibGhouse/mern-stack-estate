@@ -57,7 +57,8 @@ const Profile = () => {
                 avatar: formData.avatar,
                 userName: formData.username
             };
-            const res = await fetch(`/api/v1/user/updateUser/${currentUser.id}`, {
+            debugger
+            const res = await fetch(`/api/v1/user/updateUser/${currentUser._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

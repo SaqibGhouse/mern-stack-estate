@@ -38,7 +38,7 @@ export const signIn = async (req, res, next) => {
             .json({
                 isValid: true,
                 userName : validUser.userName,
-                id: validUser.id,
+                _id: validUser.id,
                 email : validUser.email,
                 avatar: validUser.avatar
             });
