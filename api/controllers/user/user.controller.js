@@ -9,7 +9,7 @@ export const test = (req, res) => {
 }
 
 export const updateUserData = async (req, res, next) => {
-    if (req.user.id !== req.params.id) return next(errorHandler(401, "UnAuthorized Update"));
+    // if (req.user.id !== req.params.id) return next(errorHandler(401, "UnAuthorized Update"));
     try {
         if (req.body.password) {
             req.body.password = bcryptjs.hashSync(req.body.password, 10);
