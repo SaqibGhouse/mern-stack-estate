@@ -2,12 +2,6 @@ import { errorHandler } from "../../utils/errors/error.js";
 import bcryptjs from 'bcryptjs'
 import User from '../../models/user/user.model.js'
 
-export const test = (req, res) => {
-    res.json({
-        message: 'API is working'
-    });
-}
-
 export const updateUserData = async (req, res, next) => {
     // if (req.user.id !== req.params.id) return next(errorHandler(401, "UnAuthorized Update"));
     try {

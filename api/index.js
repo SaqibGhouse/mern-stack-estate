@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user/user.route.js";
 import authRouter from "./routes/auth/auth.route.js";
+import listingRouter from './routes/listing/listing.route.js'
 import cookieParser from "cookie-parser";
 import path from "path";
 
@@ -32,6 +33,8 @@ app.use(`/api/v${version}/user`, userRouter);
 
 //Endpoint for authentication
 app.use(`/api/v${version}/auth`, authRouter);
+
+app.use(`/api/v${version}/listing`, listingRouter);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 

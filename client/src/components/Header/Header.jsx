@@ -9,13 +9,13 @@ const Header = () => {
     <header className="bg-[#49606A] p-3 pt-4">
       <div className="flex justify-between items-center">
         <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-          <span className="text-white-500 mr-1">MERN </span>
-          <span className="text-white"> Real</span>
+          <span className="text-white-500 mr-1"><Link to="/">MERN</Link> </span>
+          <span className="text-white"><Link to="/">Real</Link></span>
         </h1>
         <div className="flex bg-white p-1 rounded-full px-0 sm:px-8">
           <div className="pt-1 pr-4">
             <span className="hover:text-gray-500 hover:underline text-green-950  font-bold transition">
-              Home
+            <Link to="/">Home</Link>
             </span>
           </div>
           <div className="p-1">
