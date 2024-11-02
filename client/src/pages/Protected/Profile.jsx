@@ -16,9 +16,9 @@ import {
   deleteUserSuccessFull,
   signInStart,
   signInSuccess,
-  signOutUserFailed
+  signOutUserFailed,
 } from "../../redux/user/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -128,7 +128,6 @@ const Profile = () => {
       dispatch(deleteUserSuccessFull(data));
       navigate("/signin");
       localStorage.clear();
-
     } catch (error) {
       console.log(error);
     }
@@ -194,7 +193,7 @@ const Profile = () => {
           type="submit"
           className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-80  "
         >
-          Update
+          Update Profile
         </button>
       </form>
       <div className="flex justify-between mt-3">
@@ -210,6 +209,23 @@ const Profile = () => {
         >
           Sign Out
         </span>
+      </div>
+      <div className="flex gap-3 mt-4">
+        <button
+          type="button"
+          className="flex-1 bg-green-700 text-white rounded-lg p-2 uppercase hover:opacity-80"
+          onClick={() => navigate(`/listing`)}
+        >
+          Create Listing
+        </button>
+
+        <button
+          type="button"
+          className="flex-1 bg-orange-700 text-white rounded-lg p-2 uppercase hover:opacity-80"
+          onClick={() => navigate(`/userListing`)}
+        >
+          View Listing
+        </button>
       </div>
     </div>
   );

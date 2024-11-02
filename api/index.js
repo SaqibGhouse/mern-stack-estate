@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user/user.route.js";
 import authRouter from "./routes/auth/auth.route.js";
-import listingRouter from './routes/listing/listing.route.js'
+import listingRouter from "./routes/listing/listing.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
 
@@ -13,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 const version = 1;
+const port = process.env.PORT || 5000;
 
 mongoose
   .connect(process.env.mongoUri)
@@ -22,7 +23,7 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log("server running on port 5000");
 });
 

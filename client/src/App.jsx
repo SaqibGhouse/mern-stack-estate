@@ -6,7 +6,9 @@ import SignUp from './pages/Authentication/SignUp.jsx'
 import About from './pages/Public/About.jsx'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx'
 import Profile from "./pages/Protected/Profile.jsx";
-import CreateListing from './pages/CreateListing/create-listing.jsx'
+import CreateListing from "./pages/Listing/create-listing.jsx";
+import UserListings from "./pages/Listing/userListings.jsx";
+
 const app = () => {
   return (
     <>
@@ -20,6 +22,7 @@ const app = () => {
           <Route element={<PrivateRoute/>} >
             <Route path="profile" element={<Profile/>} />
             <Route path="listing" element={<CreateListing/>} />
+            <Route path="userListing" element={<UserListings/>} />
           </Route>
         </Routes>
       </BrowserRouter>
