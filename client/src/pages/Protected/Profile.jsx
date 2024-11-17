@@ -4,6 +4,7 @@ import {
   getDownloadURL,
   getStorage,
   ref,
+  deleteObject,
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../../../firebase";
@@ -38,27 +39,38 @@ const Profile = () => {
   }, [file]);
 
   const handleFileUpload = (file) => {
+    // Check if the file size is more than 1 MB (1 MB = 1024 * 1024 bytes)
+    const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1 MB in bytes
+    if (file.size > MAX_FILE_SIZE) {
+      alert('File size exceeds the 1 MB limit. Please upload a smaller file.');
+      return; // Prevent upload if file is too large
+    }
+  
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
     const imageStore = ref(storage, fileName);
     const uploadAvatar = uploadBytesResumable(imageStore, file);
+  
     uploadAvatar.on(
       "state_changed",
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setIsFileUploading(Math.round(progress));
       },
       (error) => {
         setFileUploadError(error);
       },
       () => {
-        getDownloadURL(uploadAvatar.snapshot.ref).then((downloadURL) =>
-          setFormData({ ...formData, avatar: downloadURL })
-        );
+        getDownloadURL(uploadAvatar.snapshot.ref).then((downloadURL) => {
+          if (typeof currentUser.avatar !== "undefined") {
+            deleteOldAvatar(currentUser.avatar);
+          }
+          setFormData({ ...formData, avatar: downloadURL });
+        });
       }
     );
   };
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -133,6 +145,35 @@ const Profile = () => {
     }
   };
 
+  const deleteOldAvatar = (imagePath) => {
+    const storage = getStorage(app);
+    const imageRef = ref(storage, extractStoragePath(imagePath));
+
+    deleteObject(imageRef)
+      .then(() => {
+        console.log("Image deleted successfully.");
+      })
+      .catch((error) => {
+        console.error("Error deleting image:", error);
+      });
+  };
+
+  function extractStoragePath(firebaseUrl) {
+    try {
+      // Find the part after "/o/" which is the storage path, then decode it
+      const pathStart = firebaseUrl.indexOf("/o/") + 3; // 3 is for length of "/o/"
+      const pathEnd = firebaseUrl.indexOf("?");
+      const encodedPath = firebaseUrl.slice(pathStart, pathEnd);
+
+      // Decode URL-encoded characters (e.g., %2F -> /)
+      const storagePath = decodeURIComponent(encodedPath);
+
+      return storagePath;
+    } catch (error) {
+      console.error("Invalid Firebase Storage URL:", error);
+      return null;
+    }
+  }
   return (
     <div className="p-3 max-w-lg mx-auto shadow-gray-400 shadow-2xl align-middle h-full mt-5">
       <h1 className="text-center text-3xl font-semibold my-7">Profile</h1>
@@ -213,18 +254,17 @@ const Profile = () => {
       <div className="flex gap-3 mt-4">
         <button
           type="button"
-          className="flex-1 bg-green-700 text-white rounded-lg p-2 uppercase hover:opacity-80"
-          onClick={() => navigate(`/listing`)}
-        >
-          Create Listing
-        </button>
-
-        <button
-          type="button"
           className="flex-1 bg-orange-700 text-white rounded-lg p-2 uppercase hover:opacity-80"
           onClick={() => navigate(`/userListing`)}
         >
           View Listing
+        </button>
+        <button
+          type="button"
+          className="flex-1 bg-green-700 text-white rounded-lg p-2 uppercase hover:opacity-80"
+          onClick={() => navigate(`/listing`)}
+        >
+          Create Listing
         </button>
       </div>
     </div>

@@ -8,6 +8,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx'
 import Profile from "./pages/Protected/Profile.jsx";
 import CreateListing from "./pages/Listing/create-listing.jsx";
 import UserListings from "./pages/Listing/userListings.jsx";
+import UpdateUserlisting from "./pages/Listing/update-user-listing.jsx";
 
 const app = () => {
   return (
@@ -23,6 +24,7 @@ const app = () => {
             <Route path="profile" element={<Profile/>} />
             <Route path="listing" element={<CreateListing/>} />
             <Route path="userListing" element={<UserListings/>} />
+            <Route path="updateUserlisting/:id" element={<UpdateUserlisting/>} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -9,8 +9,6 @@ import { app } from "../../../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
-
 const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -150,7 +148,7 @@ const CreateListing = () => {
       setLoading(false);
 
       if (data.isValid) {
-        navigate(`/listing/${data.listing._id}`);
+        navigate(`/userListing`);
       } else {
         setError(data.message); // display error message from response if available
       }
@@ -298,13 +296,22 @@ const CreateListing = () => {
             </div>
             {error && error}
 
-            <button
-              type="submit"
-              className="w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition"
-              disabled={loading ? true : false}
-            >
-              {loading ? "Creating..." : "Create Listing"}
-            </button>
+            <div className="flex justify-center gap-3 mt-4">
+              <button
+                type="button"
+                className="flex-1 bg-orange-700 text-white rounded-md py-3 uppercase hover:opacity-80 transition"
+                onClick={() => navigate(`/userListing`)}
+              >
+                View Listing
+              </button>
+              <button
+                type="submit"
+                className="flex-1 bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition"
+                disabled={loading ? true : false}
+              >
+                {loading ? "Creating..." : "Create Listing"}
+              </button>
+            </div>
           </div>
         </div>
       </form>
