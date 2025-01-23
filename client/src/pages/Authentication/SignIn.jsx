@@ -9,8 +9,8 @@ import {
 import Header from "../../components/Header/Header";
 const SignIn = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@test.com");
+  const [password, setPassword] = useState("123");
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.user);
 

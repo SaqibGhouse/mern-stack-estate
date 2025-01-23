@@ -133,7 +133,6 @@ import {
       e.preventDefault();
   
       try {
-        debugger
         if (submitFormData.imageUrls.length < 1) {
           return setError("Please upload atleast one image");
         }

@@ -52,39 +52,41 @@ const UserListings = () => {
   return (
     <div className="max-w-3xl mt-20 mx-auto space-y-4">
       {/* Scrollable Listings Container */}
-      <div className="space-y-6 overflow-y-auto max-h-[500px]">
-        {listingData.map((listing) => (
-          <div
-            key={listing._id}
-            className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
-          >
-            <div className="flex items-center space-x-4">
-              <img
-                src={listing.imageUrls[0]}
-                alt={`${listing.name} Profile`}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <h3 className="text-lg font-semibold text-gray-900">
-                {listing.name}
-              </h3>
-            </div>
+      {listingData && (
+        <div className="space-y-6 overflow-y-auto max-h-[500px]">
+          {listingData.map((listing) => (
+            <div
+              key={listing._id}
+              className="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
+            >
+              <div className="flex items-center space-x-4">
+                <img
+                  src={listing.imageUrls[0]}
+                  alt={`${listing.name} Profile`}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {listing.name}
+                </h3>
+              </div>
 
-            <div className="flex items-center space-x-4">
-              <Link to={`/updateUserlisting/${listing._id}`}>
-                <button className="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200">
-                  Edit
+              <div className="flex items-center space-x-4">
+                <Link to={`/updateUserlisting/${listing._id}`}>
+                  <button className="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200">
+                    Edit
+                  </button>
+                </Link>
+                <button
+                  className="px-3 py-1 text-sm font-medium text-red-600 bg-red-100 rounded-lg hover:bg-red-200"
+                  onClick={() => deleteListingById(listing._id)}
+                >
+                  Delete
                 </button>
-              </Link>
-              <button
-                className="px-3 py-1 text-sm font-medium text-red-600 bg-red-100 rounded-lg hover:bg-red-200"
-                onClick={() => deleteListingById(listing._id)}
-              >
-                Delete
-              </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Create Listing Button */}
       <div className="flex justify-center mt-4">

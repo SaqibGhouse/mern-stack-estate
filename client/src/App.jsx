@@ -9,6 +9,8 @@ import Profile from "./pages/Protected/Profile.jsx";
 import CreateListing from "./pages/Listing/create-listing.jsx";
 import UserListings from "./pages/Listing/userListings.jsx";
 import UpdateUserlisting from "./pages/Listing/update-user-listing.jsx";
+import ViewListing from "./pages/Listing/ViewListing.jsx";
+
 
 const app = () => {
   return (
@@ -20,6 +22,7 @@ const app = () => {
           <Route path="/signin" element={<SignIn/>} />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/about" element={<About/>} />
+          <Route path="/ViewListing/:id" element={<ViewListing/>} />
           <Route element={<PrivateRoute/>} >
             <Route path="profile" element={<Profile/>} />
             <Route path="listing" element={<CreateListing/>} />
