@@ -34,7 +34,6 @@ const UserListings = () => {
   }
 
   const deleteListingById = async (id) => {
-    console.log(listingData);
     try {
       let res = await fetch(`/api/v1/listing/deleteListingById/${id}`, {
         method: "DELETE",
@@ -50,7 +49,7 @@ const UserListings = () => {
   };
 
   return (
-    <div className="max-w-3xl mt-20 mx-auto space-y-4">
+    <div className="max-w-4xl mt-20 mx-auto space-y-4">
       {/* Scrollable Listings Container */}
       {listingData && (
         <div className="space-y-6 overflow-y-auto max-h-[500px]">
@@ -71,6 +70,11 @@ const UserListings = () => {
               </div>
 
               <div className="flex items-center space-x-4">
+              <Link to={`/viewListing/${listing._id}`}>
+                  <button className="px-3 py-1 text-sm font-medium text-white-600 bg-pink-100 rounded-lg hover:bg-pink-200">
+                    View Listing
+                  </button>
+                </Link>
                 <Link to={`/updateUserlisting/${listing._id}`}>
                   <button className="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200">
                     Edit

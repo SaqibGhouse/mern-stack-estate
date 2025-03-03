@@ -317,7 +317,7 @@ import {
                   className="flex-1 bg-orange-700 text-white rounded-md py-3 uppercase hover:opacity-80 transition"
                   onClick={() => navigate(`/userListing`)}
                 >
-                  View Listing
+                  View Listings
                 </button>
                 <button
                   type="submit"

@@ -48,8 +48,8 @@ const ViewListing = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen flex justify-center items-center p-4">
-      <div className="max-w-5xl w-full bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="flex justify-center items-center p-4">
+      <div className="max-w-7xl  bg-white shadow-lg rounded-lg overflow-hidden">
         {listing && !loader && !error && (
           <>
             <div className="relative">
@@ -98,8 +98,8 @@ const ViewListing = () => {
               </p>
 
               {/* Property Details */}
-              <div className="flex flex-wrap items-center justify-between mt-6">
-                <div className="flex items-center gap-6">
+              <div className="mt-6 max-w-md md:max-w-lg lg:max-w-xl">
+                <div className="flex flex-wrap items-start gap-4 md:gap-6">
                   <div className="flex items-center gap-2 text-gray-700">
                     <FaBed className="text-green-500" />
                     <span>{listing.bedrooms} Beds</span>
@@ -110,24 +110,14 @@ const ViewListing = () => {
                   </div>
                   <div className="flex items-center gap-2 text-gray-700">
                     <FaCar className="text-yellow-500" />
-                    <span>
-                      {listing.parking ? "Parking Available" : "No Parking"}
-                    </span>
+                    <span>{listing.parking ? "Parking Available" : "No Parking"}</span>
                   </div>
                   <div className="flex items-center gap-2 text-gray-700">
-                    <MdChair className="text-gray-500" />
-                    <span>
-                      {" "}
-                      {listing.furnished ? "Furnished" : "Not Furnished"}{" "}
-                    </span>
+                    <MdChair className="text-green-500" />
+                    <span>{listing.furnished ? "Furnished" : "Not Furnished"}</span>
                   </div>
                 </div>
               </div>
-
-              {/* Contact Button */}
-              <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-blue-700 transition">
-                Contact Landlord
-              </button>
             </div>
           </>
         )}
