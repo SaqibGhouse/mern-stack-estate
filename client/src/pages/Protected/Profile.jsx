@@ -119,9 +119,9 @@ const Profile = () => {
         return false;
       }
 
-      dispatch(deleteUserSuccessFull(data));
-      navigate("/signin");
+      dispatch(deleteUserSuccessFull(''));
       localStorage.clear();
+      navigate("/signin");
     } catch (error) {
       dispatch(deleteuserFailed(error.message));
     }
@@ -137,9 +137,11 @@ const Profile = () => {
         dispatch(signOutUserFailed());
         return false;
       }
-      dispatch(deleteUserSuccessFull(data));
-      navigate("/signin");
+
       localStorage.clear();
+      dispatch(deleteUserSuccessFull(''));
+      navigate("/signin");
+
     } catch (error) {
       console.log(error);
     }
